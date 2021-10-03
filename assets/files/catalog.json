@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+    "id":1,
+    "name":"Samsung s20",
+    "desc":"Best Phone",
+    "price":999,
+    "color":"#33055a",
+    "image":"https://i.gadgets360cdn.com/large/samsung_galaxy_a32_4g_image_1619767465324.jpg?downsize=950:*"
+  },
+  {
+    "id":2,
+    "name":"iphone 13 pro",
+    "desc":"Best Apple Phone",
+    "price":700,
+    "color":"#33055a",
+    "image":"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-blue-select-2021?wid=470&hei=556&fmt=png-alpha&.v=1629842712000"
+  },
+   {
+    "id":3,
+    "name":"Samsung s20",
+    "desc":"Best Phone",
+    "price":999,
+    "color":"#33055a",
+    "image":"https://i.gadgets360cdn.com/large/samsung_galaxy_a32_4g_image_1619767465324.jpg?downsize=950:*"
+  },
+  {
+    "id":4,
+    "name":"iphone 13 pro",
+    "desc":"Best Apple Phone",
+    "price":700,
+    "color":"#33055a",
+    "image":"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-blue-select-2021?wid=470&hei=556&fmt=png-alpha&.v=1629842712000"
+  },
+   {
+    "id":5,
+    "name":"Samsung s20",
+    "desc":"Best Phone",
+    "price":999,
+    "color":"#33055a",
+    "image":"https://i.gadgets360cdn.com/large/samsung_galaxy_a32_4g_image_1619767465324.jpg?downsize=950:*"
+  },
+  {
+    "id":6,
+    "name":"iphone 13 pro",
+    "desc":"Best Apple Phone",
+    "price":700,
+    "color":"#33055a",
+    "image":"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-blue-select-2021?wid=470&hei=556&fmt=png-alpha&.v=1629842712000"
+  }
+  ]
+}

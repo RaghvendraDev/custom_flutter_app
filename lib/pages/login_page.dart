@@ -17,10 +17,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  bool isLoading = true;
   @override
   Widget build(BuildContext context) {
+    //variable to store username and password
     var emailController = new TextEditingController();
     var passwordController = new TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Login Page'),
@@ -30,51 +34,77 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/images/hey.png"),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  TextFormField(
-                    controller: emailController,
-                    decoration: const InputDecoration(
-                      hintText: 'Email',
-                      label: Text('Email'),
-                      suffixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/hey.png"),
+                    SizedBox(
+                      height: 10.0,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      hintText: 'Password',
-                      label: Text('Password'),
-                      suffixIcon: Icon(Icons.password),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton.icon(
-                      onPressed: () {
-                        login(emailController.text, passwordController.text);
-                      },
-                      icon: Icon(
-                        Icons.login,
-                        size: 18,
+                    TextFormField(
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                        hintText: 'Email',
+                        label: Text('Email'),
+                        suffixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
                       ),
-                      label: Text("Login"),
-                      style: ElevatedButton.styleFrom(
-                        primary: MyTheme.darkBluishColor,
-                      )),
-                ],
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Username can not be blank";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: 'Password',
+                        label: Text('Password'),
+                        suffixIcon: Icon(Icons.password),
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Password can not be blank";
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    isLoading
+                        ? ElevatedButton.icon(
+                            onPressed: () {
+                              login(emailController.text,
+                                  passwordController.text);
+                              setState(() {
+                                isLoading = false;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.login,
+                              size: 18,
+                            ),
+                            label: Text("Login"),
+                            style: ElevatedButton.styleFrom(
+                              primary: MyTheme.darkBluishColor,
+                            ))
+                        : CircularProgressIndicator(),
+                    SizedBox(
+                      height: 10.0,
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -87,6 +117,10 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> login(var _email, var _pass) async {
     final String email = _email, password = _pass;
+
+    if (_formKey.currentState!.validate()) {
+      setState(() {});
+    }
     if (email.isNotEmpty && password.isNotEmpty) {
       Map<String, dynamic> bodyData = {"userId": email, "userPass": password};
       String bodyJsonData = jsonEncode(bodyData);
@@ -97,14 +131,16 @@ class _LoginPageState extends State<LoginPage> {
 
       if (serverResponse.statusCode == 200) {
         Map<String, dynamic> responseData = jsonDecode(serverResponse.body);
-        print(responseData);
-        print(responseData.length);
+        // print(responseData);
+        // print(responseData.length);
 
         LoginModelDataList.uName = LoginModel.fromMap(responseData).r_userId;
         LoginModelDataList.uPass = LoginModel.fromMap(responseData).r_userPass;
-        // LoginModel(
-        //     userName: responseData[0].toString(),
-        //     userPass: responseData[1].toString());
+
+        setState(() {
+          isLoading = true;
+        });
+
         Navigator.pushNamed(context, MyRoutes.homeDashboardRoute);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
