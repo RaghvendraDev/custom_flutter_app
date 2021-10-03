@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:ui';
 
+import 'package:customapp/model/login_model.dart';
+import 'package:customapp/model/login_model_data_list.dart';
 import 'package:customapp/utils/myRoutes.dart';
 import 'package:customapp/utils/webservices.dart';
 import 'package:customapp/widget/theme_data.dart';
@@ -86,16 +88,23 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> login(var _email, var _pass) async {
     final String email = _email, password = _pass;
     if (email.isNotEmpty && password.isNotEmpty) {
-      Map<String, dynamic> bodyData = {"userid": email, "userPass": password};
+      Map<String, dynamic> bodyData = {"userId": email, "userPass": password};
       String bodyJsonData = jsonEncode(bodyData);
 
       var serverResponse = await http.post(
           Uri.parse(Webservices.loginAuthentication_url),
           body: bodyJsonData);
 
-      Map<String, dynamic> responseData = jsonDecode(serverResponse.body);
-
       if (serverResponse.statusCode == 200) {
+        Map<String, dynamic> responseData = jsonDecode(serverResponse.body);
+        print(responseData);
+        print(responseData.length);
+
+        LoginModelDataList.uName = LoginModel.fromMap(responseData).r_userId;
+        LoginModelDataList.uPass = LoginModel.fromMap(responseData).r_userPass;
+        // LoginModel(
+        //     userName: responseData[0].toString(),
+        //     userPass: responseData[1].toString());
         Navigator.pushNamed(context, MyRoutes.homeDashboardRoute);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

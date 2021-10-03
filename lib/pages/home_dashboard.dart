@@ -1,8 +1,14 @@
+import 'package:customapp/model/login_model_data_list.dart';
 import 'package:flutter/material.dart';
 
-class HomeDashboardPage extends StatelessWidget {
+class HomeDashboardPage extends StatefulWidget {
   const HomeDashboardPage({Key? key}) : super(key: key);
 
+  @override
+  State<HomeDashboardPage> createState() => _HomeDashboardPageState();
+}
+
+class _HomeDashboardPageState extends State<HomeDashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +19,8 @@ class HomeDashboardPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Hey"),
+            Text("Hey ${LoginModelDataList.uName}"),
+            // Text("Hey"),
           ],
         ),
       ),
