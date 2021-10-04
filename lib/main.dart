@@ -1,4 +1,5 @@
-import 'package:customapp/pages/home_dashboard.dart';
+import 'package:customapp/pages/dashboard/dashboard_page.dart';
+import 'package:customapp/pages/user_dashboard.dart';
 import 'package:customapp/pages/login_page.dart';
 import 'package:customapp/utils/myRoutes.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => LoginPage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
-        MyRoutes.homeDashboardRoute: (context) => HomeDashboardPage(),
+        MyRoutes.userDashboardRoute: (context) => UserDashboardPage(),
+        MyRoutes.mainDashboardRoute: (context) => MainDashboard(),
       },
     );
   }

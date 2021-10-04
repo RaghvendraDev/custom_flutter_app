@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:customapp/model/login_model.dart';
 import 'package:customapp/model/login_model_data_list.dart';
+import 'package:customapp/pages/dashboard/dashboard_page.dart';
 import 'package:customapp/utils/myRoutes.dart';
 import 'package:customapp/utils/webservices.dart';
 import 'package:customapp/widget/theme_data.dart';
@@ -24,18 +25,17 @@ class _LoginPageState extends State<LoginPage> {
     //variable to store username and password
     var emailController = new TextEditingController();
     var passwordController = new TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Login Page'),
       ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Form(
-                key: _formKey,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -87,9 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: () {
                               login(emailController.text,
                                   passwordController.text);
-                              setState(() {
-                                isLoading = false;
-                              });
                             },
                             icon: Icon(
                               Icons.login,
@@ -119,7 +116,15 @@ class _LoginPageState extends State<LoginPage> {
     final String email = _email, password = _pass;
 
     if (_formKey.currentState!.validate()) {
-      setState(() {});
+      print("Hello");
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      print("not");
+      setState(() {
+        isLoading = true;
+      });
     }
     if (email.isNotEmpty && password.isNotEmpty) {
       Map<String, dynamic> bodyData = {"userId": email, "userPass": password};
@@ -141,18 +146,26 @@ class _LoginPageState extends State<LoginPage> {
           isLoading = true;
         });
 
-        Navigator.pushNamed(context, MyRoutes.homeDashboardRoute);
+        Navigator.pushNamed(context, MyRoutes.mainDashboardRoute);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Invalid Userid/password"),
           backgroundColor: Colors.cyan,
         ));
+
+        setState(() {
+          isLoading = true;
+        });
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Field cant be blank"),
         backgroundColor: Colors.red,
       ));
+
+      setState(() {
+        isLoading = true;
+      });
     }
   }
 }
