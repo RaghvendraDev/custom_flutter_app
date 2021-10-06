@@ -15,7 +15,7 @@ class MainDashboard extends StatelessWidget {
         ),
         body: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // ElevatedButton(
@@ -24,31 +24,41 @@ class MainDashboard extends StatelessWidget {
               //   },
               //   child: Text("Hello"),
               // ),
-              GradientButton(
-                  buttonText: "First Button",
-                  width: 150,
-                  height: 50,
-                  buttonclicked: () {
-                    sayHello(context);
-                  }),
+              Row(
+                children: [
+                  GradientButton(
+                      buttonText: "Load User Dashboard",
+                      width: 150,
+                      height: 50,
+                      buttonclicked: () {
+                        loadUserDashboard(context);
+                      }).expand(),
+                ],
+              ),
               SizedBox(
                 height: 50,
               ),
-              // SquareButtonWithColorFill(
-              //     buttonText: "First Button",
-              //     width: 150,
-              //     height: 50,
-              //     onpressed: heySecondButton),
+              Row(
+                children: [
+                  GradientButton(
+                      buttonText: "Load Dropdown Dashboard",
+                      width: 150,
+                      height: 50,
+                      buttonclicked: () {
+                        loadDropdownPage(context);
+                      }).expand(),
+                ],
+              ),
             ],
           ),
         ));
   }
 
-  void sayHello(var _ctx) {
+  void loadUserDashboard(var _ctx) {
     Navigator.pushNamed(_ctx, MyRoutes.userDashboardRoute);
   }
 
-  void heySecondButton() {
-    print("Hello Second");
+  void loadDropdownPage(var _ctx) {
+    Navigator.pushNamed(_ctx, MyRoutes.dropdownDashboardRoute);
   }
 }

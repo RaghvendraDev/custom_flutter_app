@@ -1,4 +1,5 @@
 import 'package:customapp/pages/dashboard/dashboard_page.dart';
+import 'package:customapp/pages/dropdown_dashboard/drop_down_dashboard.dart';
 import 'package:customapp/pages/user_dashboard.dart';
 import 'package:customapp/pages/login_page.dart';
 import 'package:customapp/utils/myRoutes.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.userDashboardRoute: (context) => UserDashboardPage(),
         MyRoutes.mainDashboardRoute: (context) => MainDashboard(),
+        MyRoutes.dropdownDashboardRoute: (context) => DropDownDashboard(),
       },
     );
   }

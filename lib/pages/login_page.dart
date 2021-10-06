@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
     var passwordController = new TextEditingController();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: const Text('Login Page'),
       ),
       body: SafeArea(
         child: Padding(
@@ -40,11 +40,12 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset("assets/images/hey.png"),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
                     TextFormField(
                       controller: emailController,
+                      autofocus: true,
                       decoration: const InputDecoration(
                         hintText: 'Email',
                         label: Text('Email'),
@@ -59,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextFormField(
@@ -79,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                         }
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     isLoading
@@ -88,16 +89,16 @@ class _LoginPageState extends State<LoginPage> {
                               login(emailController.text,
                                   passwordController.text);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.login,
                               size: 18,
                             ),
-                            label: Text("Login"),
+                            label: const Text("Login"),
                             style: ElevatedButton.styleFrom(
                               primary: MyTheme.darkBluishColor,
                             ))
-                        : CircularProgressIndicator(),
-                    SizedBox(
+                        : const CircularProgressIndicator(),
+                    const SizedBox(
                       height: 10.0,
                     )
                   ],
